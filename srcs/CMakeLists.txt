@@ -19,6 +19,7 @@ add_executable( alg-impl
 	test_insertion_sort.cpp
   test_alg_fixture.hpp
   test_alg_fixture.cpp
+  test_merge_sort.cpp
 )
 
 target_link_libraries( alg-impl
