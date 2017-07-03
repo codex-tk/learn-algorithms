@@ -11,8 +11,8 @@ protected:
 	virtual void SetUp();
 	virtual void TearDown();
 	
-	void CheckSorted();
-	void CheckRSorted();
+	void check_ascending();
+	void check_descending();
 };
 
 #endif
