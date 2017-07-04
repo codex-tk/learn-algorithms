@@ -5,15 +5,7 @@
 #include <vector>
 #include <algorithm>
 
-
-namespace codex {
-	namespace alg {
-		enum class order : int {
-			ascending = 0,
-			descending,
-		};
-	}
-}
+#include "alg_impl.hpp"
 
 class test_alg_fixture : public ::testing::Test {
 protected:

@@ -5,10 +5,6 @@
 namespace codex {
 	namespace alg {
 
-		template < typename containerT >
-		void merge_sort(containerT& container , order ord = order::ascending ) {
-
-		}
 		
 } }
 
