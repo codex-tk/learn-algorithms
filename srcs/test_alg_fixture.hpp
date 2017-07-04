@@ -5,6 +5,16 @@
 #include <vector>
 #include <algorithm>
 
+
+namespace codex {
+	namespace alg {
+		enum class order : int {
+			ascending = 0,
+			descending,
+		};
+	}
+}
+
 class test_alg_fixture : public ::testing::Test {
 protected:
 	std::vector<int> samples;

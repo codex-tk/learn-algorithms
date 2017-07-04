@@ -2,54 +2,38 @@
 #include <cmath>
 #include "test_alg_fixture.hpp"
 
-template < class T >
-class insertion {
-public:
-	enum class order : int {
-		ascending = 0 ,
-		descending ,
-	};
-
-	typedef typename T::value_type value_type;
-
-	insertion(T& t)
-		: _data(t)
-	{
-
-	}
-
-	bool ordered_compare(order ord, value_type& d, value_type& key) {
-		if (ord == order::ascending) {
-			return d > key;
-		}
-		return d < key;
-	}
-
-	void sort(order ord = order::ascending) {
-		for (int i = 1; i < (int)_data.size(); ++i) {
-			value_type key = _data[i];
-			int j = i - 1;
-			while (j >= 0 && ordered_compare( ord , _data[j] , key )) {
-				_data[j + 1] = _data[j];
-				--j;
+namespace codex {
+	namespace alg {
+		namespace {
+			template < typename valueT >
+			bool ordered_compare(order ord, const valueT& v, const valueT& key) {
+				if (ord == order::ascending)
+					return v > key;
+				return v < key;
 			}
-			_data[j + 1] = key;
+		}
+		template < typename containerT >
+		void insertion_sort(containerT& container , order ord = order::ascending) {
+			for (int i = 1; i < (int)container.size(); ++i) {
+				typedef typename containerT::value_type value_type;
+				value_type key = container[i];
+				int j = i - 1;
+				while (j >= 0 && ordered_compare(ord, container[j], key)) {
+					container[j + 1] = container[j];
+					--j;
+				}
+				container[j + 1] = key;
+			}
 		}
 	}
-private:
-	T& _data;
-};
-
-
+}
 TEST_F(test_alg_fixture, insertion) {
-	insertion< std::vector<int> > impl(this->samples);
-	impl.sort();
+	codex::alg::insertion_sort(this->samples);
 	this->check_ascending();
 	
 }
 
 TEST_F(test_alg_fixture, insertion_r) {
-	insertion< std::vector<int> > impl(this->samples);
-	impl.sort(insertion<std::vector<int>>::order::descending);
+	codex::alg::insertion_sort(this->samples , codex::alg::order::descending );
 	this->check_descending();
 }

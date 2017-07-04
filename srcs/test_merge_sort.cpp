@@ -2,26 +2,25 @@
 #include <cmath>
 #include "test_alg_fixture.hpp"
 
-template < typename elemT , template < typename elemT0 , class allocatorT > class containerT >
-class merge{
-public:
-	typedef containerT< elemT, std::allocator<elemT>> container_type;
-	merge(container_type& data )
-		: _data(data)
-	{}
-private:
-	container_type& _data;
-};
+namespace codex {
+	namespace alg {
+
+		template < typename containerT >
+		void merge_sort(containerT& container , order ord = order::ascending ) {
+
+		}
+		
+} }
 
 TEST_F(test_alg_fixture, merge) {
-	merge< int , std::vector > impl(this->samples);
-	//impl.sort();
+	codex::alg::merge_sort(this->samples);
 	this->check_ascending();
 
 }
 
 TEST_F(test_alg_fixture, merge_r) {
-	merge< int , std::vector > impl(this->samples);
+
+	codex::alg::merge_sort(this->samples , codex::alg::order::descending );\
 	//impl.sort(insertion<std::vector<int>>::order::descending);
 	this->check_descending();
 }
