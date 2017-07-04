@@ -11,8 +11,31 @@ namespace codex {
 		};
 
 		template < typename containerT >
-		void insertion_sort(containerT& container, order ord = order::ascending) {
+		void insertion_sort(containerT& container, std::size_t p, std::size_t q, order ord = order::ascending) {
+			typedef typename containerT::value_type value_type;
+			struct _op {
+				static bool ordered_compare(order ord, const value_type& v, const value_type& key) {
+					if (ord == order::ascending)
+						return v > key;
+					return v < key;
+				}
+			};
+			for (int i = p + 1; i <= (int)q; ++i) {
+				value_type key = container[i];
+				int j = i - 1;
+				while (j >= 0 && _op::ordered_compare(ord, container[j], key)) {
+					container[j + 1] = container[j];
+					--j;
+				}
+				container[j + 1] = key;
+			}
+		}
 
+
+		template < typename containerT >
+		void insertion_sort(containerT& container, order ord = order::ascending) {
+			insertion_sort(container, 0, container.size() - 1, ord);
+			/*
 			typedef typename containerT::value_type value_type;
 			struct _op {
 				static bool ordered_compare(order ord, const value_type& v, const value_type& key) {
@@ -29,9 +52,11 @@ namespace codex {
 					--j;
 				}
 				container[j + 1] = key;
-			}
+			}*/
+			
 		}
 
+		
 		static const int k_use_insertion_sort = 4;
 
 		template < typename containerT >
@@ -73,6 +98,10 @@ namespace codex {
 		template < typename containerT >
 		void merge_sort(containerT& container, std::size_t p, std::size_t r , order ord ) {
 			if (p < r) {
+				if (r - p <= k_use_insertion_sort) {
+					insertion_sort(container, p, r, ord);
+					return;
+				}
 				std::size_t mid = (p + r) / 2;
 				merge_sort(container, p, mid, ord);
 				merge_sort(container, mid + 1, r, ord);
