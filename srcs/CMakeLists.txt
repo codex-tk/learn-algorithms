@@ -21,6 +21,9 @@ add_executable( alg-impl
   test_alg_fixture.cpp
   test_merge_sort.cpp
 	alg_impl.hpp
+	test_math.cpp
+	math_impl.hpp
+	math_impl.cpp
 )
 
 target_link_libraries( alg-impl
