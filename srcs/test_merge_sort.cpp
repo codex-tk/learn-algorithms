@@ -2,10 +2,10 @@
 #include <cmath>
 #include "test_alg_fixture.hpp"
 
-template < typename elemT , template < typename elemT , class allocatorT > class containerT >
+template < typename elemT , template < typename elemT0 , class allocatorT > class containerT >
 class merge{
 public:
-	typedef typename containerT< elemT, std::allocator<elemT>> container_type;
+	typedef containerT< elemT, std::allocator<elemT>> container_type;
 	merge(container_type& data )
 		: _data(data)
 	{}
