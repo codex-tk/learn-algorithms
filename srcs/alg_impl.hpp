@@ -2,6 +2,27 @@
 #define __codex_alg_impl_h__
 
 #include <list>
+#include <iostream>
+#include "gtest/gtest.h"
+
+namespace testing
+{
+	namespace internal
+	{
+		enum GTestColor {
+			COLOR_DEFAULT,
+			COLOR_RED,
+			COLOR_GREEN,
+			COLOR_YELLOW
+		};
+
+		extern void ColoredPrintf(GTestColor color, const char* fmt, ...);
+	}
+}
+
+#define PRINTF(...)  do { testing::internal::ColoredPrintf(testing::internal::COLOR_GREEN, "[          ] "); testing::internal::ColoredPrintf(testing::internal::COLOR_YELLOW, __VA_ARGS__); } while(0)
+
+
 
 namespace codex {
 	namespace alg {
@@ -23,7 +44,7 @@ namespace codex {
 			for (int i = p + 1; i <= (int)q; ++i) {
 				value_type key = container[i];
 				int j = i - 1;
-				while (j >= 0 && _op::ordered_compare(ord, container[j], key)) {
+				while ( j >=static_cast<int>(p) && _op::ordered_compare(ord, container[j], key)) {
 					container[j + 1] = container[j];
 					--j;
 				}
@@ -35,29 +56,10 @@ namespace codex {
 		template < typename containerT >
 		void insertion_sort(containerT& container, order ord = order::ascending) {
 			insertion_sort(container, 0, container.size() - 1, ord);
-			/*
-			typedef typename containerT::value_type value_type;
-			struct _op {
-				static bool ordered_compare(order ord, const value_type& v, const value_type& key) {
-					if (ord == order::ascending)
-						return v > key;
-					return v < key;
-				}
-			};
-			for (int i = 1; i < (int)container.size(); ++i) {
-				value_type key = container[i];
-				int j = i - 1;
-				while (j >= 0 && _op::ordered_compare(ord, container[j], key)) {
-					container[j + 1] = container[j];
-					--j;
-				}
-				container[j + 1] = key;
-			}*/
-			
 		}
 
 		
-		static const int k_use_insertion_sort = 4;
+		static const int k_use_insertion_sort = 16;
 
 		template < typename containerT >
 		void merge(containerT& container

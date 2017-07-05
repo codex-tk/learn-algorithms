@@ -1,6 +1,8 @@
 #ifndef __math_impl_h__
 #define __math_impl_h__
 
+#include <iostream>
+
 namespace codex {
 	namespace math {
 		
