@@ -3,26 +3,6 @@
 
 #include <list>
 #include <iostream>
-#include "gtest/gtest.h"
-
-namespace testing
-{
-	namespace internal
-	{
-		enum GTestColor {
-			COLOR_DEFAULT,
-			COLOR_RED,
-			COLOR_GREEN,
-			COLOR_YELLOW
-		};
-
-		extern void ColoredPrintf(GTestColor color, const char* fmt, ...);
-	}
-}
-
-#define PRINTF(...)  do { testing::internal::ColoredPrintf(testing::internal::COLOR_GREEN, "[          ] "); testing::internal::ColoredPrintf(testing::internal::COLOR_YELLOW, __VA_ARGS__); } while(0)
-
-
 
 namespace codex {
 	namespace alg {
@@ -41,7 +21,7 @@ namespace codex {
 					return v < key;
 				}
 			};
-			for (int i = p + 1; i <= (int)q; ++i) {
+			for (int i = p + 1; i < (int)q; ++i) {
 				value_type key = container[i];
 				int j = i - 1;
 				while ( j >=static_cast<int>(p) && _op::ordered_compare(ord, container[j], key)) {
@@ -55,33 +35,33 @@ namespace codex {
 
 		template < typename containerT >
 		void insertion_sort(containerT& container, order ord = order::ascending) {
-			insertion_sort(container, 0, container.size() - 1, ord);
+			insertion_sort(container, 0, container.size()	, ord);
 		}
 
-		
+
 		static const int k_use_insertion_sort = 16;
 
 		template < typename containerT >
 		void merge(containerT& container
 			, std::size_t p
 			, std::size_t q
-			, std::size_t r 
-			, order ord ) 
+			, std::size_t r
+			, order ord )
 		{
 			typedef typename containerT::value_type value_type;
 			static std::vector< value_type > a(container.size());
 			static std::vector< value_type > b(container.size());
 			a.clear();
 			b.clear();
-			for (std::size_t i = p; i <= q; ++i) {
+			for (std::size_t i = p; i < q; ++i) {
 				a.push_back(container[i]);
 			}
-			for (std::size_t i = q + 1; i <= r; ++i) {
+			for (std::size_t i = q ; i < r; ++i) {
 				b.push_back(container[i]);
 			}
 			std::size_t a_idx = 0;
 			std::size_t b_idx = 0;
-			for (int i = p; i <= r; ++i) {
+			for (int i = p; i < r; ++i) {
 				if (a_idx >= a.size())
 					container[i] = b[b_idx++];
 				else if (b_idx >= b.size())
@@ -106,7 +86,7 @@ namespace codex {
 				}
 				std::size_t mid = (p + r) / 2;
 				merge_sort(container, p, mid, ord);
-				merge_sort(container, mid + 1, r, ord);
+				merge_sort(container, mid , r, ord);
 				merge(container, p, mid, r, ord);
 			}
 		}
@@ -115,7 +95,7 @@ namespace codex {
 		void merge_sort(containerT& container, order ord = order::ascending) {
 			if (container.size() < k_use_insertion_sort)
 				return insertion_sort(container, ord);
-			merge_sort(container, 0, container.size() - 1, ord);
+			merge_sort(container, 0, container.size() , ord);
 		}
 	}
 }

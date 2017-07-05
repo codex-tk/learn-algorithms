@@ -24,3 +24,10 @@ TEST(gcd, math) {
 	ASSERT_EQ(codex::math::gcd(280, 30), 10);
 	ASSERT_EQ(codex::math::gcd(30, 280), 10);
 }
+
+TEST( soas , math ) {
+	ASSERT_EQ( codex::math::sum_of_arithmetic_sequence( 8 , 12 , 3) , 21);
+	ASSERT_EQ( codex::math::sum_of_arithmetic_sequence( 10 , 12 , 3) , 12);
+	ASSERT_EQ( codex::math::sum_of_arithmetic_sequence( 9 , 12 , 3) , 21);
+	ASSERT_EQ( codex::math::sum_of_arithmetic_sequence( 11 , 12 , 3) , 12);
+}
