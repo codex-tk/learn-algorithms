@@ -6,7 +6,7 @@
 TEST_F(test_alg_fixture, insertion) {
 	codex::alg::insertion_sort(this->samples);
 	this->check_ascending();
-	
+
 }
 
 TEST_F(test_alg_fixture, insertion_r) {

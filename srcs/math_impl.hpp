@@ -18,7 +18,7 @@ namespace codex {
 			return x;
 		}
 
-		typename < typename valueT >
+		template < typename valueT >
 		valueT lcm( valueT x , valueT y ) {
 			/*
 			valueT gcd_val = gcd( x, y);
