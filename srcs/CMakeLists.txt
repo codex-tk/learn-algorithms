@@ -25,6 +25,7 @@ add_executable( alg-impl
 	math_impl.hpp
 	math_impl.cpp
 	gtest_helper.hpp
+	test_hanoi.cpp
 )
 
 target_link_libraries( alg-impl

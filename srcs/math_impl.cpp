@@ -27,5 +27,14 @@ namespace codex{
 			return d * (n * val) / 2; // 등차 수열의 합공식 Sn = ( a1 + an ) / 2;
 			// n{ 2a + ( n - 1 ) d } / 2
 		}
+
+		linear_equation linear_equation_solve(const point & a, const point & b)
+		{
+			linear_equation result;
+			result.ax = (b.y-a.y)/(b.x-a.x);
+			result.b = (a.y - (result.ax * a.x));
+			return result;
+		}
+		
 	}
 }
