@@ -22,15 +22,14 @@ namespace codex {
 		valueT lcm( valueT x , valueT y ) {
 			/*
 			valueT gcd_val = gcd( x, y);
-			valueT x_reminder = x % gcd_val;
-			valueT y_reminder = y % gcd_val;
-			return gcd_val * x_reminder * y_reminder;
+			valueT xx = x / gcd_val;
+			valueT yy = y / gcd_val;
+			return gcd_val * xx * yy;
 			// 소인수분해 기준
 			*/
 			// X = G * x , Y = G * y
 			// X * Y = G * G * x * y
 			// X * Y / G = G * x * y
-			// profit!
 			return x * y / gcd( x , y );
 		}
 		int sum_of_arithmetic_sequence( int b , int e , int d);

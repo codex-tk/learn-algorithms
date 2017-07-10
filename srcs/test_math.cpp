@@ -31,3 +31,19 @@ TEST( soas , math ) {
 	ASSERT_EQ( codex::math::sum_of_arithmetic_sequence( 9 , 12 , 3) , 21);
 	ASSERT_EQ( codex::math::sum_of_arithmetic_sequence( 11 , 12 , 3) , 12);
 }
+
+TEST(lcm , math ){
+	int x = 36;
+	int y = 24;
+	int gcd = codex::math::gcd(x,y);
+	int lcm = 0;
+	if( gcd != 1 ) {
+		int xx = x / gcd;
+		int yy = y / gcd;
+		lcm = xx * yy * gcd;
+	} else {
+		lcm = x * y;
+	}
+	ASSERT_EQ( codex::math::lcm(x, y) , lcm );
+	ASSERT_EQ( codex::math::lcm(8, 9) , 8 * 9 / codex::math::gcd( 8 , 9 ));
+}

@@ -4,7 +4,7 @@ if [ ! -d "./output" ]; then
 fi
 
 cd output
-cmake ..
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..
 make -j 4
 
 if [ $? -eq 0 ]; then
