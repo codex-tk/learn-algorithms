@@ -34,6 +34,19 @@ namespace codex {
 		}
 		int sum_of_arithmetic_sequence( int b , int e , int d);
 
+		struct linear_equation {
+			double ax;
+			double b;
+		};
+
+		struct point {
+			double x;
+			double y;
+		};
+
+		linear_equation linear_equation_solve(const point& a, const point& b);
+
+
 	}
 }
 
